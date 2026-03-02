@@ -26,12 +26,13 @@
 
     body {
       font-family: var(--font-lexend);
+      color: var(--ink-dark);
       min-height: 100vh;
       display: grid;
       place-items: center;
       padding: 20px;
       background-color: #ffffff;
-      position: relative;
+      line-height: 1.5;
       overflow-x: hidden;
     }
 
@@ -68,38 +69,64 @@
       overflow-y: auto;
       max-height: 85vh;
       scrollbar-width: none;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
     }
+    
     .screen::-webkit-scrollbar { display: none; }
 
     .topbar {
       background: linear-gradient(135deg, var(--brand-purple), var(--accent-purple));
-      padding: 40px 24px;
+      background-image: url('assets/img/icones-negocio.png'), url('assets/img/image_fc18db.png');
+      background-size: 80%, cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-blend-mode: overlay, screen;
+      padding: 45px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-radius: 0 0 40px 40px;
+      position: relative;
     }
 
-    .logo img { width: 140px; height: auto; }
+    .logo img { width: 130px; height: auto; }
 
     .lang-btn {
-      padding: 8px 16px;
+      padding: 8px 18px;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
+      background-color: var(--brand-purple); 
+      color: #ffffff;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 13px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .wrap {
-      padding: 30px 24px;
+      padding: 35px 24px;
       display: flex;
       flex-direction: column;
+      gap: 35px;
     }
 
-    h1 { font-size: 1.8rem; color: var(--brand-purple); text-align: center; font-weight: 700; margin-bottom: 8px; }
-    header p { font-size: 0.9rem; color: var(--ink-muted); text-align: center; font-weight: 300; line-height: 1.5; }
+    header h1 { 
+      font-size: 1.7rem; 
+      color: var(--brand-purple); 
+      text-align: center; 
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    header p { 
+      font-size: 0.95rem; 
+      color: var(--ink-muted); 
+      text-align: center; 
+      font-weight: 300; 
+      padding: 0 10px;
+    }
 
     .section-title { 
       font-size: 1.1rem; 
@@ -108,7 +135,6 @@
       letter-spacing: 1.5px; 
       text-align: center;
       font-weight: 700;
-      margin-top: 35px;
       margin-bottom: 25px;
     }
 
@@ -119,7 +145,7 @@
     }
 
     .card {
-      padding: 20px;
+      padding: 22px 15px;
       border-radius: var(--radius-md);
       background: #ffffff;
       border: 1px solid rgba(0, 0, 0, 0.05);
@@ -129,37 +155,78 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
     }
 
-    .card:hover { transform: translateY(-5px); border-color: var(--brand-purple); }
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--brand-purple);
+      box-shadow: 0 15px 35px rgba(143, 44, 255, 0.12);
+    }
 
-    .card-icon { width: 45px; height: 45px; margin-bottom: 12px; object-fit: contain; }
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 15px;
+      object-fit: contain;
+    }
 
-    .card h3 { font-size: 0.95rem; margin-bottom: 6px; color: var(--ink-dark); font-weight: 600; }
-    .card p { font-size: 0.75rem; color: var(--ink-muted); font-weight: 300; line-height: 1.3; }
+    .card h3 { font-size: 0.9rem; margin-bottom: 8px; color: var(--ink-dark); font-weight: 600; }
+    .card p { font-size: 0.75rem; color: var(--ink-muted); font-weight: 300; line-height: 1.4; }
 
-    .footer { margin-top: 30px; }
-    .cta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .footer {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cta-row { 
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      gap: 12px; 
+    }
 
     .btn {
       padding: 15px;
       border-radius: 18px;
+      background: #f8f8f8;
+      color: var(--ink-dark);
       text-decoration: none;
       text-align: center;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
+      transition: 0.3s;
+      border: 1px solid rgba(0,0,0,0.03);
     }
 
-    .btn.primary { background: var(--accent-green); color: #fff; grid-column: span 2; }
-    .btn.blue { background: var(--accent-blue); color: #fff; }
-    .btn.full { grid-column: span 2; background: #f0f0f0; color: var(--ink-dark); margin-top: 5px; }
+    .btn.primary {
+      background: var(--accent-green);
+      color: #fff;
+      grid-column: span 2;
+      border: none;
+      margin-bottom: 4px;
+    }
 
-    @media (max-width: 360px) { .solutions { grid-template-columns: 1fr; } }
+    .btn.blue { 
+      background: var(--accent-blue);
+      color: #fff;
+      border: none;
+    }
+    
+    .btn.full { 
+      grid-column: span 2; 
+      background: rgba(143, 44, 255, 0.1);
+      color: var(--brand-purple);
+      margin-top: 4px;
+      border: 1px solid rgba(143, 44, 255, 0.1);
+    }
+
+    @media (max-width: 360px) {
+      .solutions { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 
@@ -183,40 +250,39 @@
         <section>
           <h2 class="section-title">Our Solutions</h2>
           <div class="solutions">
-            
             <a href="https://gosat.org/smart-connect/" class="card">
               <img src="assets/img/icon-smart.png" class="card-icon" alt="Smart Connect">
               <h3>Smart Connect</h3>
               <p>Centralized IPBX on a single platform.</p>
             </a>
-
             <a href="https://gosat.org/branded-call/" class="card">
               <img src="assets/img/icon-branded.png" class="card-icon" alt="Branded Call">
               <h3>Branded Call</h3>
               <p>Identify your calls and avoid spam.</p>
             </a>
-
             <a href="https://gosat.org/message/" class="card">
               <img src="assets/img/icon-message.png" class="card-icon" alt="Message">
               <h3>Message</h3>
               <p>High-conversion RCS and SMS.</p>
             </a>
-
             <a href="https://gosat.org/voice/" class="card">
               <img src="assets/img/icon-voice.png" class="card-icon" alt="Voice">
               <h3>Voice</h3>
               <p>High-quality VoIP with competitive rates.</p>
             </a>
-
           </div>
         </section>
 
         <footer class="footer">
           <div class="cta-row">
-            <a class="btn primary" href="https://wa.me/5531999476464">💬 Message us on WhatsApp</a>
+            <a class="btn primary" href="https://wa.me/5531999476464">
+              💬 Message us on WhatsApp
+            </a>
             <a class="btn blue" href="https://www.instagram.com/gosattelecom/">Instagram</a>
             <a class="btn blue" href="https://www.linkedin.com/company/gosat/">LinkedIn</a>
-            <a class="btn full" href="assets/img/portfolio-gosat.png" download>⬇️ Download Portfolio (PNG)</a>
+            <a class="btn full" href="assets/img/portfolio-gosat.png" download>
+              ⬇️ Download Portfolio (PNG)
+            </a>
           </div>
         </footer>
       </div>
