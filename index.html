@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gosat Portfolio</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+  :root {
+    --brand-yellow: #e9a829;
+    --brand-purple: #733191;
+    --accent-orange: #d9186a;
+    --accent-green: #00d285;
+    --accent-blue: #5d9bff;
+    --ink-dark: #333;
+    --ink-muted: #777;
+    --radius-lg: 32px;
+    --radius-md: 20px;
+    --font-main: 'Lexend', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-main);
+    background: #fdfdfd;
+    color: var(--ink-dark);
+    line-height: 1.6;
+    overflow-x: hidden; /* Evita scroll horizontal acidental */
+  }
+
+  header.hero {
+    background: linear-gradient(135deg, var(--brand-yellow), var(--accent-orange), var(--brand-purple));
+    color: #fff;
+    text-align: center;
+    padding: 60px 20px 60px;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    position: relative;
+  }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto 40px;
+  }
+
+  .logo img {
+    width: 140px;
+    height: auto;
+  }
+
+  .lang-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+    transition: 0.3s;
+  }
+
+  header.hero h1 {
+    font-size: 2.2rem;
+    line-height: 1.2;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+
+  header.hero p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    opacity: 0.9;
+  }
+
+  .cta-main {
+    display: inline-block;
+    padding: 16px 32px;
+    background: var(--accent-green);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 14px;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 210, 133, 0.3);
+  }
+
+  section {
+    padding: 60px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  section h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+    color: var(--brand-purple);
+  }
+
+  .solutions {
+      display: grid;
+      /* Mudamos de auto-fit para 4 colunas fixas no desktop/tablet */
+      grid-template-columns: repeat(4, 1fr); 
+      gap: 16px; /* Reduzi um pouco o gap para caber melhor em telas médias */
+      width: 100%;
+    }
+
+    /* Quando a tela for menor que 768px (tablets e celulares), 
+       aí sim permitimos quebrar para não ficar ilegível */
+    @media (max-width: 850px) {
+      .solutions {
+        grid-template-columns: repeat(2, 1fr); /* 2 por linha no tablet */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .solutions {
+        grid-template-columns: 1fr; /* 1 por linha no celular */
+      }
+      .card {
+        padding: 20px 15px; /* Reduz padding interno para ganhar espaço */
+      }
+    }
+
+  .card {
+    background: #fff;
+    border-radius: var(--radius-md);
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border: 1px solid #f0f0f0;
+  }
+
+  .card img { width: 100px; margin-bottom: 15px; }
+  .card img {
+  width: 100px;
+  margin-bottom: 15px;
+  animation: rotate 6s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+  .social {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os botões quebrem linha no mobile */
+    justify-content: center;
+    gap: 12px;
+    margin-top: 50px;
+  }
+
+  .social a {
+    padding: 12px 20px;
+    border-radius: 12px;
+    background: #f0f0f0;
+    color: var(--ink-dark);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    flex: 1; /* Faz os botões crescerem igualmente no mobile */
+    min-width: 140px;
+    max-width: 200px;
+    text-align: center;
+  }
+.cta-solutions {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.cta-solutions a {
+  background: #733191; 
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.cta-solutions a:hover {
+  background: #21306b;
+  transform: translateY(-2px);
+}
+  footer {
+    padding: 40px 20px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+  }
+
+  /* --- MEDIA QUERIES (A MÁGICA DO MOBILE) --- */
+
+  @media (max-width: 768px) {
+    header.hero { padding: 40px 20px 50px; }
+    header.hero h1 { font-size: 1.8rem; }
+    header.hero p { font-size: 1rem; }
+    
+    .solutions {
+      grid-template-columns: 1fr; /* Uma coluna apenas no celular */
+    }
+  }
+
+  @media (max-width: 480px) {
+    .topbar {
+      margin-bottom: 30px;
+    }
+    .logo img { width: 110px; }
+    .lang-btn img { width: 80px !important; } /* Ajuste na bandeira */
+    
+    .social a {
+      flex: 1 1 100%; /* Botões ocupam a largura toda em telas muito pequenas */
+      max-width: none;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Hero -->
+<header class="hero">
+  <div class="topbar">
+    <div class="logo">
+      <img src="assets/img/gosat-logo.png" alt="Gosat Logo">
+    </div>
+   <a class="lang-btn" href="index-en.html">
+    <img src="assets/img/us-flag.png" alt="USA Flag" style="width: 80px; vertical-align: middle; margin-right: 5%;"> 
+</a>
+  </div>
+  <h1>Conectando empresas e clientes</h1>
+  <p>Desde 2015, transformamos a comunicação com inovação, inteligência e confiança.</p>
+  <a href="https://wa.me/5531999476464" class="cta-main">💬 Fale conosco no WhatsApp</a>
+</header>
+
+  <!-- Solutions -->
+  <section>
+    <h2>Nossas Soluções</h2>
+    <div class="solutions">
+      <div class="card">
+        <img src="assets/img/icon-smart.png" alt="Smart Connect">
+        <h3>Smart Connect</h3>
+        <p>Centralize seu IPBX Multicanal em uma única plataforma.</p>
+      </div>
+      <div class="card">
+        <img src="assets/img/icon-branded.png" alt="Branded Call">
+        <h3>Branded Call</h3>
+        <p>Identifique suas chamadas e evite spam.</p>
+      </div>
+      <div class="card">
+        <img src="assets/img/icon-message.png" alt="Message">
+        <h3>Message</h3>
+        <p>RCS e SMS mensagens com alta conversão.</p>
+      </div>
+      <div class="card">
+        <img src="assets/img/icon-voice.png" alt="Voice">
+        <h3>Voice</h3>
+        <p>VoIP de alta qualidade com tarifas competitivas.</p>
+      </div>
+    </div>
+
+    <!-- Social Links -->
+    <div class="social">
+  <a href="https://www.instagram.com/gosattelecom/">Instagram</a>
+  <a href="https://www.linkedin.com/company/gosat/">LinkedIn</a>
+  <a href="assets/img/portfolio-gosat.png" download>⬇ Baixar Portfólio</a>
+</div>
+
+<div class="cta-solutions">
+  <a href="https://gosat.org/solucoes/" target="_blank">Conhecer mais soluções</a>
+</div>
+
+  <!-- Footer -->
+  <footer>
+    © 2026 Gosat Telecom — Todos os direitos reservados
+  </footer>
+
+</body>
+</html>
