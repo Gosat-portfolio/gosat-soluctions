@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gosat Telecom — Conectando empresas e clientes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --yellow:  #e9a829;
+      --purple:  #733191;
+      --pink:    #d9186a;
+      --green:   #00d285;
+      --blue:    #5d9bff;
+
+      --bg:      #f7f5f2;
+      --surface: #ffffff;
+      --border:  #e8e4de;
+
+      --ink:     #333333;
+      --ink-2:   #555555;
+      --ink-3:   #777777;
+
+      --font-head: 'Lexend', sans-serif;
+      --font-body: 'Lexend', sans-serif;
+
+      --radius-card: 20px;
+      --radius-pill: 100px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 16px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      width: calc(100% - 48px);
+      max-width: 1020px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 22px;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    .nav-logo img { width: 110px; height: auto; display: block; }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+
+    .nav-lang {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 16px;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      color: var(--ink-2); font-size: 0.82rem; font-weight: 500;
+      text-decoration: none; font-family: var(--font-body);
+      transition: background .2s, border-color .2s;
+    }
+    .nav-lang:hover { background: #ece9e4; border-color: #ccc; }
+    .nav-lang img { width: 38px; border-radius: 3px; }
+
+    .nav-cta {
+      padding: 10px 22px;
+      background: var(--green); color: #0a2b1e;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem; font-weight: 700;
+      text-decoration: none; font-family: var(--font-body);
+      transition: background .2s, transform .2s, box-shadow .2s;
+    }
+    .nav-cta:hover {
+      background: #00b872;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0,210,133,.3);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center;
+      padding:100px 24px 40px; 
+      position: relative; overflow: hidden;
+    }
+
+    .blob {
+      position: absolute; border-radius: 50%;
+      filter: blur(90px); pointer-events: none;
+    }
+    .blob-1 { width: 520px; height: 520px; top: -80px; left: -120px; background: var(--yellow); opacity: .15; animation: drift 16s ease-in-out infinite alternate; }
+    .blob-2 { width: 420px; height: 420px; top: 60px; right: -80px;  background: var(--purple); opacity: .10; animation: drift 20s 2s ease-in-out infinite alternate; }
+    .blob-3 { width: 340px; height: 340px; bottom: 0; left: 30%;     background: var(--pink);   opacity: .08; animation: drift 18s 1s ease-in-out infinite alternate; }
+
+    @keyframes drift { from { transform: translate(0,0); } to { transform: translate(30px,20px); } }
+
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(0,0,0,.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      mask-image: radial-gradient(ellipse 80% 60% at center, black 40%, transparent 100%);
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 18px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      font-size: .75rem; font-weight: 600;
+      color: var(--ink-2); letter-spacing: .07em; text-transform: uppercase;
+      margin-bottom: 28px;
+      position: relative; z-index: 1;
+      box-shadow: 0 2px 10px rgba(0,0,0,.06);
+      animation: fadeUp .7s ease both;
+    }
+
+    .badge-dot {
+      width: 7px; height: 7px; background: var(--green);
+      border-radius: 50%; animation: pulse-dot 2.2s ease infinite;
+    }
+    @keyframes pulse-dot { 0%,100% { box-shadow: 0 0 0 0 rgba(0,210,133,.5); } 50% { box-shadow: 0 0 0 5px rgba(0,210,133,0); } }
+
+    .hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.6rem, 6vw, 4.4rem);
+      font-weight: 800; line-height: 1.08;
+      letter-spacing: -.03em; margin-bottom: 22px;
+      color: var(--purple);
+      position: relative; z-index: 1;
+      animation: fadeUp .7s .08s ease both;
+    }
+
+    .hero h1 em {
+      font-style: normal; position: relative; white-space: nowrap;
+      color: var(--ink);
+    }
+    .hero h1 em::after {
+      content: '';
+      position: absolute; bottom: 4px; left: 0; right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--yellow), var(--pink));
+      border-radius: 4px; z-index: -1; opacity: .5;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--ink-2); max-width: 500px;
+      margin: 0 auto 36px; line-height: 1.75;
+      font-weight: 400; position: relative; z-index: 1;
+      animation: fadeUp .7s .16s ease both;
+    }
+
+    .hero-actions {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
+      position: relative; z-index: 1;
+      animation: fadeUp .7s .24s ease both;
+    }
+
+    .btn-whatsapp {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 15px 28px;
+      background: var(--green); color: #0a2b1e;
+      font-weight: 700; font-size: .95rem;
+      border-radius: var(--radius-pill); text-decoration: none;
+      font-family: var(--font-body);
+      transition: background .25s, transform .25s, box-shadow .25s;
+    }
+    .btn-whatsapp:hover {
+      background: #00b872;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0,210,133,.35);
+    }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 15px 28px; background: var(--surface);
+      border: 1.5px solid var(--border); color: var(--ink);
+      font-weight: 500; font-size: .95rem;
+      border-radius: var(--radius-pill); text-decoration: none;
+      font-family: var(--font-body);
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .btn-ghost:hover { border-color: var(--purple); color: var(--purple); transform: translateY(-2px); }
+
+    /* ── SECTION ── */
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 40px 24px 80px; }
+
+    .section-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .73rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--purple); margin-bottom: 12px;
+    }
+    .section-eyebrow::before { content: ''; width: 18px; height: 2px; background: var(--purple); border-radius: 2px; }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+      font-weight: 800; letter-spacing: -.025em; line-height: 1.12;
+      margin-bottom: 10px;
+      color: var(--purple);
+    }
+    .section-sub { color: var(--ink-2); font-size: .97rem; line-height: 1.7; max-width: 100%; margin-bottom: 52px; }
+
+    /* ── CARDS ── */
+    .cards { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-card); padding: 36px 32px 32px;
+      position: relative; overflow: hidden;
+      transition: transform .35s cubic-bezier(.23,1,.32,1), box-shadow .35s, border-color .25s;
+    }
+    .card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 3px; border-radius: 0 0 var(--radius-card) var(--radius-card);
+      opacity: 0; transition: opacity .3s;
+    }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,.09); border-color: transparent; }
+    .card:hover::after { opacity: 1; }
+
+    /* CORRIGIDO: Smart Connect chip agora em azul */
+    .card[data-c="blue"]::after   { background: var(--blue); }
+    .card[data-c="pink"]::after   { background: var(--pink); }
+    .card[data-c="green"]::after  { background: var(--green); }
+    .card[data-c="yellow"]::after { background: var(--yellow); }
+    .card[data-c="purple"]::after { background: var(--purple); }
+
+    .card-chip {
+      display: inline-block; font-size: .7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .08em;
+      padding: 4px 11px; border-radius: var(--radius-pill); margin-bottom: 20px;
+    }
+    /* CORRIGIDO: Smart Connect chip em azul */
+    .card[data-c="blue"]   .card-chip { color: #1a54b0; background: #deeaff; }
+    .card[data-c="pink"]   .card-chip { color: #a01050; background: #fde6f0; }
+    .card[data-c="green"]  .card-chip { color: #007a4d; background: #d0f9ec; }
+    .card[data-c="yellow"] .card-chip { color: #a06c0a; background: #fef3d4; }
+    .card[data-c="purple"] .card-chip { color: #5a2478; background: #f0e7f9; }
+
+    .card-num {
+      position: absolute; top: 28px; right: 28px;
+      width: 80px; height: 80px;
+      object-fit: contain;
+      opacity: .85;
+      animation: spin 8s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .card h3 {
+      font-family: var(--font-head); font-size: 1.25rem; font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--purple);
+    }
+    .card p { color: var(--ink-2); font-size: .92rem; line-height: 1.7; }
+
+    .card-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 22px; font-size: .84rem; font-weight: 600;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
+      border: 1.5px solid currentColor;
+      transition: background .2s, color .2s, transform .2s;
+    }
+    .card-cta:hover { transform: translateY(-2px); }
+    .card[data-c="blue"]   .card-cta { color: var(--blue); }
+    .card[data-c="pink"]   .card-cta { color: var(--pink); }
+    .card[data-c="green"]  .card-cta { color: var(--green); }
+    .card[data-c="yellow"] .card-cta { color: var(--yellow); }
+    .card[data-c="purple"] .card-cta { color: var(--purple); }
+    .card[data-c="blue"]   .card-cta:hover { background: var(--blue);   color: #fff; }
+    .card[data-c="pink"]   .card-cta:hover { background: var(--pink);   color: #fff; }
+    .card[data-c="green"]  .card-cta:hover { background: var(--green);  color: #fff; }
+    .card[data-c="yellow"] .card-cta:hover { background: var(--yellow); color: #fff; }
+    .card[data-c="purple"] .card-cta:hover { background: var(--purple); color: #fff; }
+
+
+
+    .card-center {
+      grid-column: 1 / -1;
+      max-width: calc(50% - 8px);
+      margin: 0 auto;
+    }
+
+    @media (max-width: 760px) {
+      .card-center { max-width: 100%; }
+    }
+    .cta-strip {
+      margin: 0 24px 80px;
+      max-width: 1040px;
+      margin-left: auto; margin-right: auto;
+      background: linear-gradient(135deg, var(--purple) 0%, #a0348e 30%, #d9186a 65%, var(--yellow) 100%);
+      border-radius: 28px;
+      padding: 64px 48px;
+      position: relative; overflow: hidden;
+      text-align: center;
+    }
+
+    .cta-strip::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 0%, rgba(255,255,255,.15), transparent 55%);
+      pointer-events: none;
+    }
+
+    .cta-strip-text { position: relative; z-index: 1; }
+    .cta-strip-text h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+      font-weight: 800; color: #fff; margin-bottom: 10px;
+    }
+    .cta-strip-text p { color: rgba(255,255,255,.75); font-size: .97rem; margin-bottom: 32px; }
+
+    .cta-strip-actions {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;
+      position: relative; z-index: 1;
+    }
+
+    .btn-white {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 15px 28px; background: #fff; color: var(--purple);
+      font-weight: 700; font-size: .95rem;
+      border-radius: var(--radius-pill); text-decoration: none;
+      font-family: var(--font-body);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,.18); }
+
+    .btn-outline-white {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 15px 28px; background: transparent;
+      border: 2px solid rgba(255,255,255,.45);
+      color: #fff; font-weight: 600; font-size: .95rem;
+      border-radius: var(--radius-pill); text-decoration: none;
+      font-family: var(--font-body);
+      transition: border-color .2s, background .2s;
+    }
+    .btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,.1); }
+
+    /* ── PARCEIROS ── */
+    .partners-wrap {
+      max-width: 1040px; margin: 0 auto; padding: 0 24px 80px;
+    }
+
+    .partners-inner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 48px 40px;
+      text-align: center;
+    }
+
+    .partners-inner .section-eyebrow { justify-content: center; }
+    .partners-inner .section-title { text-align: center; margin-bottom: 8px; }
+    .partners-inner .section-sub { text-align: center; margin: 0 auto 40px; max-width: 480px; }
+
+    .partners-grid {
+      display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px;
+    }
+
+    .partner-logo-slot {
+      display: flex; align-items: center; justify-content: center;
+      width: 160px; height: 72px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 20px;
+      transition: border-color .2s, transform .2s, box-shadow .2s, background .2s;
+      overflow: hidden;
+    }
+    .partner-logo-slot:hover {
+      border-color: var(--purple);
+      background: var(--surface);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(115,49,145,.1);
+    }
+    .partner-logo-slot img {
+      max-width: 100%; max-height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: grayscale(30%);
+      transition: filter .2s;
+    }
+    .partner-logo-slot:hover img { filter: grayscale(0%); }
+
+    @media (max-width: 760px) {
+      .partner-logo-slot { width: 130px; height: 60px; }
+    }
+
+    /* ── SOCIAL ── */
+    .social-wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px 80px; text-align: center; }
+    .social-label {
+      font-size: .73rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .1em; color: var(--ink-3); margin-bottom: 16px;
+    }
+    .social-links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+
+    .slink {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 20px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 14px;
+      color: var(--ink); text-decoration: none;
+      font-size: .88rem; font-weight: 500; font-family: var(--font-body);
+      transition: border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .slink:hover { border-color: var(--purple); color: var(--purple); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.07); }
+
+    .slink-icon {
+      width: 28px; height: 28px; border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem; flex-shrink: 0;
+    }
+    .slink.ig  .slink-icon { background: linear-gradient(135deg,#f09433,#dc2743,#bc1888); }
+    .slink.li  .slink-icon { background: #0077b5; color: #fff; font-size: .7rem; font-weight: 700; }
+    .slink.dl  .slink-icon { background: #e8f0fe; }
+    .slink.web .slink-icon { background: #f0eaf7; }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 28px 24px; }
+    .footer-inner {
+      max-width: 1040px; margin: 0 auto;
+      display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 14px;
+    }
+    .footer-inner img { width: 100px; display: block; }
+    .footer-copy { font-size: .78rem; color: var(--ink-3); }
+    .footer-tag {
+      font-size: .75rem; color: var(--ink-3);
+      padding: 5px 14px; background: var(--bg);
+      border: 1px solid var(--border); border-radius: var(--radius-pill);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 760px) {
+      nav { width: calc(100% - 24px); padding: 12px 16px; }
+      .nav-cta { display: none; }
+      .cards { grid-template-columns: 1fr; }
+      .cta-strip { padding: 48px 24px; }
+      .cta-strip-actions { flex-direction: column; align-items: center; }
+      .footer-inner { flex-direction: column; text-align: center; align-items: center; }
+      .partners-inner { padding: 32px 20px; }
+    }
+    @media (max-width: 480px) {
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .btn-whatsapp, .btn-ghost { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">
+      <img src="assets/img/gosat-logo.webp" alt="Gosat Telecom">
+    </div>
+    <div class="nav-right">
+      <a class="nav-lang" href="index.html">
+        <img src="assets/img/brazil-flag.png" alt="EN"> EN
+      </a>
+      <a class="nav-cta" href="https://wa.me/5531999476464">💬 Talk to us</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="hero-grid"></div>
+
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Reference in Telecom since 2015
+    </div>
+
+    <h1>Your company speaks,<br><em>your customer listens</em></h1>
+
+    <p>Intelligent multi-channel communication for businesses that want to truly connect with their customers.</p>
+
+    <div class="hero-actions">
+      <a href="https://wa.me/5531999476464" class="btn-whatsapp">💬 Talk to us</a>
+    </div>
+  </header>
+
+  <!-- SOLUTIONS -->
+  <div class="wrap" id="solucoes">
+    <div class="reveal">
+      <div class="section-eyebrow">Solutions</div>
+      <h2 class="section-title">Everything for your communication to grow</h2>
+      <p class="section-sub">Integrated platforms for each step of the journey, from the first contact to after-sales.</p>
+    </div>
+
+    <div class="cards">
+      <!-- CORRIGIDO: data-c="blue" (era yellow) -->
+      <div class="card reveal" data-c="blue" style="transition-delay:.04s">
+        <img class="card-num" src="assets/img/icon-smart.png" alt="Smart Connect">
+        <span class="card-chip">IPBX Multichannel</span>
+        <h3>Smart Connect</h3>
+        <p>Centralize calls, queues, reports and integrations in a single intelligent platform. Fewer tools, more control.</p>
+        <a href="https://gosat.org/smart-connect/" class="card-cta" target="_blank">Learn more →</a>
+      </div>
+
+      <!-- CORRIGIDO: "Identificação de Chamadas" (era "Identidade de Chamada") -->
+      <div class="card reveal" data-c="pink" style="transition-delay:.09s">
+        <img class="card-num" src="assets/img/icon-branded.png" alt="Branded Call">
+        <span class="card-chip">Call Identification</span>
+        <h3>Branded Call</h3>
+        <p>Your customers see the company name and logo before answering. More trust, more connections, fewer ignored calls.</p>
+        <a href="https://gosat.org/branded-call/" class="card-cta" target="_blank">Learn more →</a>
+      </div>
+
+      <div class="card reveal" data-c="green" style="transition-delay:.14s">
+        <img class="card-num" src="assets/img/icon-message.png" alt="Message">
+        <span class="card-chip">Mensageria</span>
+        <h3>Message</h3>
+        <p>RCS e SMS com alta taxa de conversão para campanhas, notificações e atendimento. Alcance quem importa, na hora certa.</p>
+        <a href="https://gosat.org/message/" class="card-cta" target="_blank">Learn more →</a>
+      </div>
+
+      <div class="card reveal" data-c="yellow" style="transition-delay:.19s">
+        <img class="card-num" src="assets/img/icon-voice.png" alt="Voice">
+        <span class="card-chip">VoIP</span>
+        <h3>Voice</h3>
+        <p>High-quality calls with competitive rates. Cut costs without sacrificing clarity and stability.</p>
+        <a href="https://gosat.org/voice/" class="card-cta" target="_blank">Learn more →</a>
+      </div>
+
+      <!-- NOVO CARD: Todas as Soluções -->
+      <div class="card reveal card-center" data-c="purple" style="transition-delay:.24s">
+        <img class="card-num" src="https://gosat.org/wp-content/uploads/2026/02/solucoes-colmeia-scaled.webp" alt="Todas as Soluções">
+        <span class="card-chip">Complete Portfolio</span>
+        <h3>Complete Portfolio</h3>
+        <p>Explore the complete portfolio of Gosat Telecom and find the ideal solution for your business to grow with intelligence and efficiency.</p>
+        <a href="https://gosat.org/solucoes/" class="card-cta" target="_blank">View all solutions →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA STRIP -->
+  <div class="cta-strip reveal">
+    <div class="cta-strip-text">
+      <h2>Ready to connect?</h2>
+      <p>Speak with a specialist and find the ideal solution for your business.</p>
+    </div>
+    <div class="cta-strip-actions">
+      <a href="https://wa.me/5531999476464" class="btn-white">💬 Chat on WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- SOCIAL -->
+  <div class="social-wrap reveal">
+    <p class="social-label">Follow us</p>
+    <div class="social-links">
+      <a href="https://www.instagram.com/gosattelecom/" class="slink ig" target="_blank">
+        <span class="slink-icon">📸</span> Instagram
+      </a>
+      <a href="https://www.linkedin.com/company/gosat/" class="slink li" target="_blank">
+        <span class="slink-icon">in</span> LinkedIn
+      </a>
+      <a href="assets/img/portfolio-gosat.png" download class="slink dl">
+        <span class="slink-icon">⬇️</span> Download Portfolio
+      </a>
+      <a href="https://gosat.org" target="_blank" class="slink web">
+        <span class="slink-icon">🔗</span> gosat.org
+      </a>
+    </div>
+  </div>
+
+  <!-- PARCEIROS -->
+  <div class="partners-wrap reveal">
+    <div class="partners-inner">
+      <div class="section-eyebrow">Partners</div>
+      <h2 class="section-title">Who is with us</h2>
+      <p class="section-sub">Great names in the market that integrate and drive Gosat's solutions.</p>
+
+      <div class="partners-grid">
+        <div class="partner-logo-slot"><img src="https://gosat.org/wp-content/uploads/2026/02/www-gosat-org-20251103-114955-beucubtthk8o-Copia-174-e1767646356632.png" alt="Google"></div>
+        <div class="partner-logo-slot"><img src="https://gosat.org/wp-content/uploads/2026/02/www-gosat-org-20251103-114955-beucubtthk8o-Copia-179-e1767646372619.png" alt="Hiya"></div>
+        <div class="partner-logo-slot"><img src="https://gosat.org/wp-content/uploads/2026/02/www-gosat-org-20251103-114955-beucubtthk8o-Copia-178.png" alt="Zoom Phone"></div>
+        <div class="partner-logo-slot"><img src="https://gosat.org/wp-content/uploads/2026/02/www-gosat-org-20251103-114955-beucubtthk8o-Copia-177.png" alt="SolCall"></div>
+        <div class="partner-logo-slot"><img src="https://gosat.org/wp-content/uploads/2026/02/www-gosat-org-20251103-114955-beucubtthk8o-Copia-176.png" alt="VICIdial"></div>
+        <div class="partner-logo-slot"><img src="https://gosat.org/wp-content/uploads/2026/02/www-gosat-org-20251103-114955-beucubtthk8o-Copia-175.png" alt="WebSIA"></div>
+        <div class="partner-logo-slot"><img src="https://gosat.org/wp-content/uploads/2026/02/www-gosat-org-20251103-114955-beucubtthk8o-Copia-173.png" alt="Yeastar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <img src="assets/img/gosat-logo.webp" alt="Gosat Telecom">
+      <span class="footer-copy">© 2026 Gosat Telecom — Todos os direitos reservados</span>
+      <span class="footer-tag">Est. 2015 · Belo Horizonte, MG</span>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+      });
+    });
+  </script>
+
+</body>
+</html>
